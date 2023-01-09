@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="outer-section">
+	<div class="content-box pb-1">
+	  <div class="mt-5">
+		<img height="250rem" class="mt-5 profile-img" src="{{ user_profile.profile_img.url }}" alt="Profile Picture">
+	  </div>
+      <form method="post" class="my-form d-grid gap-2" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" class="form-control ps-3 mb-3" name="profile_image" accept="image/*"> 
+        <div class="form-floating">
+          <h4><label for="bioTextarea" class="form-label">Bio</label></h4> 
+          <textarea class="form-control p-3" style="height: 100px" id="bioTextarea" name="bio">{{ user_profile.bio }}</textarea>
+        </div> 
+        <div class="mb-3">
+          <h4><label for="locationInput" class="form-label">Location</label></h4>
+          <input type="text" class="form-control" id="locationInput" name="location" value="{{ user_profile.location }}" placeholder="Miami, Florida" required>
+        </div>
+                
+        <div class="text-end">
+          <a href="/" class="pe-2">Cancel</a>
+           <button type="submit" class="mb-2 px-4 btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}

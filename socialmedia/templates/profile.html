@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="outer-section">
+	<div class="content-box pb-1">
+	  <div class="mt-5">
+		<img height="250rem" class="mt-5 profile-img" src="{{ user_profile.profile_img.url }}" alt="Profile Picture">
+	  </div>
+	  <h4 class="mb-4">@{{ user_profile.user.username }}</h4>
+	  <div class="profile-text mb-5">
+		<p>{{ user_profile.bio }}</p>
+		<i class="fa-solid fa-location-dot"></i> <span>{{ user_profile.location }}</span>
+	  </div>
+	</div>
+  </div>
+{% endblock content %}

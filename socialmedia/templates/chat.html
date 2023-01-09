@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="outer-section my-5">
+    {% if invalid_recipient %} 
+      {% if current_user == recipient %}
+      <div>
+        <h2>Dude! Don't you have like friends??</h2>
+        <p>Why are you tryna chat with yourself, vruh??</p>
+        <img height="350rem" src="https://img.freepik.com/free-vector/alone-concept-illustration_114360-2628.jpg?w=740&t=st=1673239021~exp=1673239621~hmac=7c5cec2aa60a91cc314a3a876b5663995df31cd1047034bbc65a0e540f40e1da" alt="Lonely user">
+      </div>
+      {% else %}
+      <div>
+        <h2>User "@{{ recipient }}" does not exist</h2>
+        <img height="350rem" src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?w=740&t=st=1673227533~exp=1673228133~hmac=ae0fde15da2e83f62733ed2a1a1ae891c2eef168c7e55d20ee62d638206f121f" alt="No users found">
+      
+      </div>
+      {% endif %} 
+    {% else %}
+      <a href="/profile/{{ recipient }}">
+        <div class="card chat-header border border-dark mb-1">
+              <div class="card-body">
+              <h3 class="card-title text-dark">{{ recipient }}</h3>
+              </div>
+        </div>
+      </a>
+      <div class="chat-body border border-dark px-3 pt-4">
+        {% if messages %} 
+          {% for message in messages %} 
+            {% if message.sender == recipient %}
+            <div class="alert py-2 px-3 text-start alert-dark message-box">
+              {{ message.message }}
+            </div>
+            {% else %}
+            <div class="message">
+              <div class="message__outer">
+                <div class="message__inner">
+                  <div class="alert py-2 px-3 text-start bg-primary text-white message-box message__bubble">{{ message.message }}</div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="message-box">
+            <p>No messages here</p>
+            <img height="350rem" src="https://img.freepik.com/free-vector/alone-concept-illustration_114360-2628.jpg?w=740&t=st=1673239021~exp=1673239621~hmac=7c5cec2aa60a91cc314a3a876b5663995df31cd1047034bbc65a0e540f40e1da" alt="Lonely user">
+          </div>
+        {% endif %}
+        <form action="/send/" class="my-form d-grid gap-2 mt-0" method="post">
+          {% csrf_token %}
+          <div class="input-group">
+              <input class="form-control border border-dark" name="message" placeholder="Hey buddy..." required></input>
+              <input type="hidden" name="recipient" value="{{ recipient }}" />
+              <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-angle-double-right"></i></button>
+          </div>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+{% endblock content %}

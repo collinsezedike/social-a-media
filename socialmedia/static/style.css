@@ -1,0 +1,73 @@
+a {
+  text-decoration: none;
+}
+hr {
+  width: 10%;
+}
+
+.navbar {
+  padding: 0.8rem;
+}
+
+.outer-section {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  padding: 1rem;
+}
+@media (min-width:1025px)  { 
+  .outer-section {
+      width: 55%;
+  }
+}
+
+.content-box {
+  background-color: #efefef;
+  border-radius: 50px;
+}
+
+.my-form {
+  padding: 3rem;
+  margin: 4rem auto;
+  width: 95%;
+  text-align: left;
+}
+.my-form input {
+  padding: 0.7rem;
+}
+.my-form textarea {
+  resize: none;
+}
+
+.profile-img {
+  border-radius: 50%;
+}
+.profile-text {
+  line-height: 0.5rem;
+}
+
+.chat-header {
+  border-radius: 50px 50px 0 0;
+}
+.chat-body {
+  background-color: #efefef;
+  border-radius: 0 0 50px 50px;
+}
+
+
+.message-box {
+  width: max-content;
+  border-radius: 50px;
+}
+.message__outer {
+  display: flex;
+}
+.message__inner {
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.message__bubble {
+  max-width: calc(100% - 67px);
+  overflow-wrap: break-word;
+}

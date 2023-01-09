@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="outer-section mt-5">
+    {% if chats %}
+      <div class="row">
+        {% for chat in chats %}
+          <a href="/chat/{{ chat.recipient_username }}">
+            <div class="card mb-1">
+              <div class="row g-0">
+                <div class="col text-end mt-3">
+                  <div class="card-body">
+                    <h3 class="card-title text-dark">{{ chat.recipient_username }}</h3>
+                  </div>
+                </div>
+                <div class="col text-end mt-1">
+                  <img height="70" width="100" style="max-width: 100px; border-radius: 50%;" src="{{ chat.recipient_profile_img }}" class="img-fluid " alt="Recipient profile image">
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <h3>You have no conversations. Meet new people by searching for them.</h3>
+      <img height="350rem" src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?w=740&t=st=1673227533~exp=1673228133~hmac=ae0fde15da2e83f62733ed2a1a1ae891c2eef168c7e55d20ee62d638206f121f" alt="No users found">
+    {% endif %}
+  </div>
+{% endblock content %}

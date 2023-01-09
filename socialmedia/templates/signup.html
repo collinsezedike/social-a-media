@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block navbar %}
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="/"><h2>Social-A-Media</h2></a>
+    <form class="d-flex" action="../search">
+      <input class="form-control me-2" name="search_term" type="search" placeholder="Search username" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    </div>
+  </nav>
+{% endblock navbar %}
+{% block content %}
+  <div class="outer-section"> 
+    <div class="content-box mb-3"> 
+      <form method="post" class="my-form d-grid gap-2">
+        {% csrf_token %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+        <div class="mb-3">
+          <h4><label for="usernameInput" class="form-label">Username</label></h4>
+          <input type="text" class="form-control" id="usernameInput" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="mb-3">
+          <h4><label for="emailInput" class="form-label">Email address</label></h4>
+          <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email address" required>
+        </div>
+        <div class="mb-3">
+          <h4><label for="passwordInput" class="form-label">Password</label></h4>
+          <input type="password" class="form-control" id="passwordInput" name="password" placeholder="***********" required>
+        </div>
+        <div class="mb-3">
+          <h4><label for="passwordInput" class="form-label">Confirm Password</label></h4>
+          <input type="password" class="form-control" id="passwordInput" name="confirm_password" placeholder="***********" required>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+        <div class="text-center mt-3">
+          <p>Do you have an account? <a href="/signin">Login</a></p> 
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
