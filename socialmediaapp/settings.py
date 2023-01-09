@@ -136,5 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = "media/"
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "socialmedia", "media")
+
 app_name = "socialmedia"
 MEDIA_ROOT = os.path.join(BASE_DIR, app_name, "media")
