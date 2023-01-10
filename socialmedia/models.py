@@ -19,7 +19,7 @@ class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipient_username = models.CharField(max_length=120, blank=False, null=False)
     recipient_profile_img = models.CharField(max_length=1200, blank=False, null=False)
-    chat_id = models.IntegerField()
+    conversation_id = models.IntegerField()
     
     def __str__(self):
         return self.recipient
@@ -30,7 +30,7 @@ class Message(models.Model):
     recipient = models.CharField(max_length=120, blank=False, null=False)
     message = models.TextField(max_length=100000, blank=False, null=False)
     sent_at = models.DateTimeField(auto_now_add=True)
-    chat_id = models.IntegerField()
+    conversation_id = models.IntegerField()
     
     def __str__(self):
         return self.message

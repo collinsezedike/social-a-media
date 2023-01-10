@@ -125,7 +125,7 @@ def chat(request, recipient):
         else:    
             if Chat.objects.filter(user=current_user, recipient_username=recipient).exists():
                 chat_with_recipient = Chat.objects.get(user=current_user, recipient_username=recipient)
-                my_messages = Message.objects.filter(chat_id=chat_with_recipient.chat_id).all()
+                my_messages = Message.objects.filter(conversation_id=chat_with_recipient.conversation_id).all()
                 context = {
                     "recipient": recipient,
                     "messages": my_messages
@@ -152,7 +152,7 @@ def send_message(request):
      
     if Chat.objects.filter(user=current_user, recipient_username=recipient).exists():
         chat_object = Chat.objects.get(user=current_user, recipient_username=recipient)
-        new_message = Message.objects.create(sender=current_user.username, recipient=recipient, message=message, chat_id=chat_object.chat_id)
+        new_message = Message.objects.create(sender=current_user.username, recipient=recipient, message=message, conversation_id=chat_object.conversation_id)
         new_message.save()
     else:
         recipient_user_obj = User.objects.get(username=recipient)
@@ -161,7 +161,7 @@ def send_message(request):
             user=current_user, 
             recipient_username=recipient_user_obj.username,
             recipient_profile_img=recipient_profile_obj.profile_img.url,
-            chat_id=randrange(100000, 10000000)
+            conversation_id=randrange(100000, 10000000)
             )
         new_chat_obj_for_current_user.save()
         
@@ -170,7 +170,7 @@ def send_message(request):
             user=recipient_user_obj, 
             recipient_username=current_user.username,
             recipient_profile_img=current_user_profile_obj.profile_img.url,
-            chat_id=new_chat_obj_for_current_user.chat_id
+            conversation_id=new_chat_obj_for_current_user.conversation_id
             )
         new_chat_obj_for_recipient.save()
         
@@ -178,7 +178,7 @@ def send_message(request):
             sender=current_user.username, 
             recipient=recipient, 
             message=message, 
-            chat_id=new_chat_obj_for_current_user.chat_id
+            conversation_id=new_chat_obj_for_current_user.conversation_id
             )
         new_message.save()
     return redirect("chat", recipient=recipient)
