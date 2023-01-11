@@ -104,10 +104,14 @@ def profile(request, username):
     if User.objects.filter(username=username.lower()).exists():
         requested_user = User.objects.get(username=username.lower())
         requested_user_profile = Profile.objects.get(user=requested_user)
-        context = {
-            "requested_user_profile": requested_user_profile,
-            "user_profile" : user_profile
-        }
+    else:
+        requested_user_profile = None
+        
+    context = {
+        "username": username,
+        "requested_user_profile": requested_user_profile,
+        "user_profile" : user_profile
+    }
     return render(request, "profile.html", context=context)
 
 
