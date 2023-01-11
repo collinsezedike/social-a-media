@@ -1,14 +1,32 @@
 {% extends "base.html" %}
+{% block navbar %}
+  {% if user_profile %}
+  	{{ block.super }}
+  {% else %}
+	<nav class="navbar navbar-light bg-light">
+	  <div class="container-fluid">
+		<a class="navbar-brand" href="/"><h2>Social-A-Media</h2></a>
+		<form class="d-flex" action="{% url 'search' %}">
+		  <input class="form-control me-2" name="search_term" type="search" placeholder="Search username" aria-label="Search">
+		  <button class="btn btn-outline-success" type="submit">Search</button>
+		</form>
+	  </div>
+	</nav>
+  {% endif %}
+{% endblock navbar %}
 {% block content %}
   <div class="outer-section">
 	<div class="content-box pb-1">
 	  <div class="mt-5">
-		<img height="250rem" class="mt-5 profile-img" src="{{ user_profile.profile_img.url }}" alt="Profile Picture">
+		<img height="250rem" class="mt-5 profile-img" src="{{ requested_user_profile.profile_img.url }}" alt="Profile Picture">
 	  </div>
-	  <h4 class="mb-4">@{{ user_profile.user.username }}</h4>
-	  <div class="profile-text mb-5">
-		<p>{{ user_profile.bio }}</p>
-		<i class="fa-solid fa-location-dot"></i> <span>{{ user_profile.location }}</span>
+	  <h4 class="mb-4 mt-3">@{{ requested_user_profile.user.username }}</h4>
+	  <div class="profile-text">
+		<p>{{ requested_user_profile.bio }}</p>
+		<i class="fa-solid fa-location-dot"></i> <span>{{ requested_user_profile.location }}</span>
+	  </div>
+	  <div>
+		  <a class="btn btn-primary px-5 mb-4 mt-4" href="/chat/{{ requested_user_profile.user.username }}">Message</a>
 	  </div>
 	</div>
   </div>

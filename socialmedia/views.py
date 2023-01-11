@@ -93,11 +93,21 @@ def settings(request):
 
 # @login_required(login_url="signin")
 def profile(request, username):
-    user = User.objects.get(username=username.lower())
-    user_profile = Profile.objects.get(user=user)
-    context = {
-        "user_profile": user_profile
-    }
+    # This is necessary for the navbar links
+    current_user = auth.get_user(request) 
+    if User.objects.filter(username=current_user.username).exists():
+        user = User.objects.get(username=current_user.username)
+        user_profile = Profile.objects.get(user=user)
+    else:
+        user_profile = None
+        
+    if User.objects.filter(username=username.lower()).exists():
+        requested_user = User.objects.get(username=username.lower())
+        requested_user_profile = Profile.objects.get(user=requested_user)
+        context = {
+            "requested_user_profile": requested_user_profile,
+            "user_profile" : user_profile
+        }
     return render(request, "profile.html", context=context)
 
 
@@ -105,7 +115,17 @@ def search(request):
     search_term = request.GET["search_term"].lower()
     all_users = User.objects.all().filter(is_staff=False) # it should not get admin users else, it throws a sort of key error
     matching_user_profiles = [Profile.objects.get(user=user) for user in all_users if search_term in user.username]
+
+    # This is necessary for the navbar links
+    current_user = auth.get_user(request) 
+    if User.objects.filter(username=current_user.username).exists():
+        user = User.objects.get(username=current_user.username)
+        user_profile = Profile.objects.get(user=user)
+    else:
+        user_profile = None
+        
     context = {
+        "user_profile" : user_profile,
         "matching_user_profiles": matching_user_profiles, 
         "search_term": search_term  
     }
