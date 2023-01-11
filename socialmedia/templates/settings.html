@@ -3,7 +3,7 @@
   <div class="outer-section">
 	<div class="content-box pb-1">
 	  <div class="mt-5">
-		<img height="250rem" class="mt-5 profile-img" src="{{ user_profile.profile_img.url }}" alt="Profile Picture">
+		<img class="mt-5 profile-img" src="{{ user_profile.profile_img.url }}" alt="Profile Picture">
 	  </div>
       <form method="post" class="my-form d-grid gap-2" enctype="multipart/form-data">
         {% csrf_token %}
