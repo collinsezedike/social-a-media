@@ -8,7 +8,7 @@ User = get_user_model()
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=500, blank=True, null=False)
-    profile_img = models.ImageField(upload_to="social-a-media/profile-images/", default="blank-profile-picture.png")
+    profile_img = models.ImageField(upload_to="social-a-media/profile-images/", default="social-a-media/blank-profile-picture.png")
     location = models.CharField(max_length=120, blank=True, null=False)
     
     def __str__(self):
