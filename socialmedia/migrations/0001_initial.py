@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('bio', models.CharField(blank=True, max_length=500)),
-                ('profile_img', models.ImageField(default='blank-profile-picture.png', upload_to='profile-images')),
+                ('profile_img', models.ImageField(default='blank-profile-picture.png', upload_to='social-a-media/profile-images/')),
                 ('location', models.CharField(blank=True, max_length=120)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
