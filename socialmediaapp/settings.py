@@ -50,7 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     "socialmedia",
+    "table_prefix",
 ]
+
+# table prefix name
+DB_PREFIX = "social_a_media_"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',    
