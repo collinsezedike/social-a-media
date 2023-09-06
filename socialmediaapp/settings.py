@@ -39,6 +39,8 @@ if not DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+    "django_db_prefix"
+    
     "whitenoise.runserver_nostatic",
     'cloudinary_storage',
     'cloudinary',
